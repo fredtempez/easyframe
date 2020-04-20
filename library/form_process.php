@@ -5,6 +5,10 @@ function traitement_formulaire($id_form, $id_form_send, $traitement) {
     $valeur_form;
     $error_form = 0;
     $message_error_form;
+    $champ_secure = "";
+    $valeur_secure = "";
+    $valeur_form = "";
+    $message_error_form = "";
     
     $id_form = ( empty($id_form) ? "" : htmlspecialchars($id_form));
     if(trim($id_form) != "" AND $id_form == $id_form_send) {
@@ -33,7 +37,7 @@ function traitement_formulaire($id_form, $id_form_send, $traitement) {
                     
             }
             
-            $valeur_form .= ( empty($valeur_form) ? $champ_secure.'::'.$valeur_secure : '//'.$champ_secure.'::'.$valeur_secure );
+            $valeur_form .= isset($valeur_form) ? $champ_secure.'::'.$valeur_secure : '//'.$champ_secure.'::'.$valeur_secure ;
             
             // Vérification des champs
             switch(substr($array_champ_verif[1] ,0, 2)) {

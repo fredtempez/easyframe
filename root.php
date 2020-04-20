@@ -39,7 +39,7 @@ $controleur = array (
         // Choix des fichiers .JS que la page doit charger => avant la balise </BODY>
         // Entrez le nom du fichier défini depuis la page setting.php
         // Vous pouvez mettre plusieurs noms séparés d'une virgule ou laisser le champ vide
-        'jsfoot' => 'jquery,bootstrapjs,compteurjs'
+        'jsfoot' => 'jquery,tether,bootstrapjs,compteurjs'
         
     ),
     

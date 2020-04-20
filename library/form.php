@@ -5,6 +5,13 @@ function formulaire($arrayForm, $pageSecure) {
     $arrayInfo = $arrayForm["info"];
     $id_form = ( !empty($arrayInfo["id"]) ? $arrayInfo["id"] : "");
     
+    if (!isset($_POST['validation_form']) ) {
+        $_POST['validation_form'] = "";
+    }
+    if (!isset($_POST['validation_form']) ) {
+        $_POST['validation_form'] = "";
+    }
+
     if($_POST['validation_form'] == $id_form AND $_POST['error_form'] == 0) {
         $confirmation_formulaire = ( !empty($arrayInfo['confirmation']) ? $arrayInfo['confirmation'] : "<h4>Formulaire envoyé !</h4>");
         echo '<div class="alert alert-info top50" role="alert">'.$confirmation_formulaire.'</div>';
@@ -33,6 +40,10 @@ function formulaire($arrayForm, $pageSecure) {
                 $key_champ = key($champ);
                 
                 $verif_champ = ( !empty($champ[$key_champ]["verif"]) ? $champ[$key_champ]["verif"] : "no");
+                $array_champ = "";
+                if (!isset($champ[$key_champ]["name"])) {
+                    $champ[$key_champ]["name"] = "";
+                }
                 $array_champ .= ( !empty($array_champ) ? "-".$key_champ.':'.$verif_champ.':'.$champ[$key_champ]["name"] : $key_champ.':'.$verif_champ.':'.$champ[$key_champ]["name"]);
                 
                 $asterisque = ( !empty($champ[$key_champ]["verif"]) ? " *" : "");
@@ -52,18 +63,22 @@ function formulaire($arrayForm, $pageSecure) {
                     
                 } 
                 else {
-                    $valeur = $champ[$key_champ]["value"];
+                    if (isset($champ[$key_champ]["value"])) {
+                        $valeur = $champ[$key_champ]["value"];
+                    }
                 }
                 
                 $class_error_form = "";$msg_error_form = "";
                 
-                foreach($array_message_error_form as $message_error_recup) {
-                    $array_message_error_recup = explode(":", $message_error_recup);
-                    foreach($array_message_error_recup as $error_msg) {
-                        if($array_message_error_recup[1] == $error_msg AND $champ[$key_champ]["name"] == $array_message_error_recup[0]) {
-                            if($array_message_error_recup[1] != "") { 
-                                $class_error_form = 'danger'; 
-                                $msg_error_form = '<div class="form-control-feedback">'.$array_message_error_recup[1].'</div>';
+                if (isset($array_message_error_form)) {
+                    foreach($array_message_error_form as $message_error_recup) {
+                        $array_message_error_recup = explode(":", $message_error_recup);
+                        foreach($array_message_error_recup as $error_msg) {
+                            if($array_message_error_recup[1] == $error_msg AND $champ[$key_champ]["name"] == $array_message_error_recup[0]) {
+                                if($array_message_error_recup[1] != "") { 
+                                    $class_error_form = 'danger'; 
+                                    $msg_error_form = '<div class="form-control-feedback">'.$array_message_error_recup[1].'</div>';
+                                }
                             }
                         }
                     }
@@ -96,8 +111,8 @@ function formulaire($arrayForm, $pageSecure) {
                         $name_check = $champ[$key_champ]["name"];
                         foreach($arrayForm[$key][$key_champ]["input"] as $champ_check) {
                             $key_check = array_search ($champ_check, $arrayForm[$key][$key_champ]["input"]);
-                            $arrayValueCheck = explode(",", $key_check);
-                            $checked_check = ( $arrayValueCheck[1] != "" ? "checked" : "" );
+                            $arrayValueCheck = explode(",", $key_check);                            
+                            $checked_check = isset($arrayValueCheck[1]) && $arrayValueCheck[1] !== "" ? "checked" : "" ;
                             echo '<div class="form-check"><label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="'.$name_check.'[]" value="'.str_replace(",checked", "", $key_check).'" '.$checked_check.'> '.$champ_check.'
                             </label></div>';

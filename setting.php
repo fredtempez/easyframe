@@ -24,6 +24,7 @@ $headHTML = [
     // Vous pouvez indiquer autant de fichiers que vous souhaitez. Ils s'ajouteront dans le même ordre
     // 'Nom UNIQUE du fichier' => 'nom du fichier .css'
     'bootstrap' => 'bootstrap.min.css',
+    'tether' => 'tether.min.css',
     'css' => 'style.css',
     'css2' => 'style2.css',
 
@@ -31,8 +32,9 @@ $headHTML = [
     // Vous pouvez indiquer autant de fichiers que vous souhaitez. Ils s'ajouteront dans le même ordre
     // 'Nom UNIQUE du fichier' => 'nom du fichier .js'
     'jquery' => 'jquery.min.js',
-    'compteurjs' => 'compteur.min.js',    
+    'compteurjs' => 'compteur.min.js',
     'bootstrapjs' => 'bootstrap.min.js',
+    'tether' => 'tether.min.js',
     'monScript' => 'monscript.js',
     'monScript2' => 'monscript2.min.js',
 
